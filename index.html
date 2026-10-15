@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An interactive management learning game for students.">
+  <title>Management Mission: The Leadership Escape</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" id="brandHome" aria-label="Management Mission home"><span class="brand-icon">◆</span> MANAGEMENT MISSION</a>
+    <div class="top-actions">
+      <button class="quiet-button" id="homeButton" type="button">Home</button>
+      <button class="quiet-button" id="restartTop" type="button">Restart</button>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section id="homeScreen" class="screen hero-screen">
+      <div class="hero-copy">
+        <p class="eyebrow">INTRODUCTION TO MANAGEMENT · LEARNING GAME</p>
+        <h1>Can you unlock<br><span>the Management HQ?</span></h1>
+        <p class="lead">A team has become trapped inside Management HQ. Solve real-world management challenges, collect access keys, and unlock every room before the final leadership test.</p>
+        <div class="outcome-card">
+          <h2>Learning mission</h2>
+          <p>By the end of this game, you should be able to identify and apply the four core management functions: <strong>planning, organizing, leading, and controlling</strong>.</p>
+        </div>
+        <div class="home-controls">
+          <button class="primary-button" id="startButton" type="button">Start mission <span aria-hidden="true">→</span></button>
+          <label class="toggle-row"><input id="untimedToggle" type="checkbox" checked> <span><strong>Untimed learning</strong><small>No countdown—focus on understanding.</small></span></label>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <div class="hq-building">
+          <div class="hq-top">HQ</div><div class="hq-window"></div><div class="hq-window"></div><div class="hq-window"></div>
+          <div class="hq-door"></div>
+        </div>
+        <div class="floating-card card-a">📋 <span>PLAN</span></div>
+        <div class="floating-card card-b">👥 <span>ORGANIZE</span></div>
+        <div class="floating-card card-c">🎯 <span>CONTROL</span></div>
+        <div class="hero-stamp">MISSION<br>01</div>
+      </div>
+      <div class="feature-strip">
+        <div><span>01</span><strong>12 challenges</strong><small>Learn by doing</small></div>
+        <div><span>02</span><strong>4 rooms</strong><small>Unlock as you go</small></div>
+        <div><span>03</span><strong>Try again</strong><small>Feedback with explanations</small></div>
+      </div>
+    </section>
+
+    <section id="instructionsScreen" class="screen instructions-screen hidden">
+      <p class="eyebrow">MISSION BRIEFING</p>
+      <h1>Before you enter</h1>
+      <p class="lead compact">Each room contains management challenges. Choose the best answer to unlock the next door.</p>
+      <div class="instruction-grid">
+        <article class="instruction-card"><span class="instruction-icon">🧭</span><h2>Explore</h2><p>Read the scenario carefully. Each challenge represents a workplace decision.</p></article>
+        <article class="instruction-card"><span class="instruction-icon">🔑</span><h2>Answer to unlock</h2><p>Select one answer. A correct answer earns a knowledge point and an access key.</p></article>
+        <article class="instruction-card"><span class="instruction-icon">💡</span><h2>Learn from feedback</h2><p>Read the explanation. If you are incorrect, you can try again without losing learning points.</p></article>
+      </div>
+      <div class="instruction-bottom">
+        <div class="controls-note"><strong>Controls</strong><span>Mouse or touch: tap an answer. Keyboard: use Tab and Enter/Space.</span><span>There is no speed bonus. Your result reflects answers understood, not how fast you play.</span></div>
+        <button class="primary-button" id="enterButton" type="button">Enter Management HQ →</button>
+      </div>
+    </section>
+
+    <section id="gameScreen" class="screen game-screen hidden">
+      <div class="game-header">
+        <div><p class="eyebrow" id="roomEyebrow">ROOM 01</p><h1 id="roomTitle">Planning Lab</h1></div>
+        <div class="score-pills"><span class="pill">Challenge <strong id="questionCount">1 / 12</strong></span><span class="pill">Knowledge points <strong id="scoreDisplay">0</strong></span></div>
+      </div>
+      <div class="progress-wrap"><div class="progress-label"><span>Mission progress</span><span id="progressText">0% complete</span></div><div class="progress-track"><div id="progressBar" class="progress-bar"></div></div></div>
+      <div class="room-layout">
+        <aside class="room-map">
+          <p class="map-title">HQ ACCESS MAP</p>
+          <div class="map-room active" id="mapRoom0"><span>01</span><div><strong>Planning Lab</strong><small>Set the direction</small></div><b>●</b></div>
+          <div class="map-room" id="mapRoom1"><span>02</span><div><strong>Organizing Hub</strong><small>Arrange resources</small></div><b>●</b></div>
+          <div class="map-room" id="mapRoom2"><span>03</span><div><strong>Leadership Lounge</strong><small>Guide the team</small></div><b>●</b></div>
+          <div class="map-room" id="mapRoom3"><span>04</span><div><strong>Control Centre</strong><small>Check performance</small></div><b>●</b></div>
+          <div class="key-counter"><span class="key-symbol">🔑</span><div><strong id="keysDisplay">0 / 4 keys</strong><small>One key per room</small></div></div>
+        </aside>
+        <div class="challenge-panel">
+          <div class="scenario-banner"><span class="scenario-icon" id="scenarioIcon">📋</span><div><span class="scenario-label">WORKPLACE CHALLENGE</span><p id="scenarioText">Scenario goes here.</p></div></div>
+          <div class="question-area"><p class="question-label">YOUR DECISION</p><h2 id="questionText">Question goes here?</h2><div id="answerOptions" class="answer-options"></div></div>
+          <div id="feedbackPanel" class="feedback-panel hidden" aria-live="polite"><div class="feedback-heading"><span id="feedbackIcon">✓</span><strong id="feedbackTitle">Correct!</strong></div><p id="feedbackText"></p><div class="feedback-actions"><button id="retryButton" class="secondary-button hidden" type="button">Try again</button><button id="continueButton" class="primary-button" type="button">Continue →</button></div></div>
+          <div class="panel-footer"><span>💬 Read the explanation before continuing.</span><button id="skipToHome" class="text-button" type="button">Exit mission</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="completeScreen" class="screen completion-screen hidden">
+      <div class="completion-icon" id="completionIcon">🏆</div>
+      <p class="eyebrow">MISSION REPORT</p>
+      <h1 id="completionTitle">Management HQ unlocked!</h1>
+      <p class="lead compact" id="completionMessage">You completed the mission.</p>
+      <div class="results-grid">
+        <div class="result-card"><span>Knowledge score</span><strong id="finalScore">0 / 12</strong><small>Based on first-attempt answers</small></div>
+        <div class="result-card"><span>Challenges completed</span><strong id="finalCompleted">12 / 12</strong><small>All explanations reviewed</small></div>
+        <div class="result-card"><span>Rooms unlocked</span><strong id="finalRooms">4 / 4</strong><small>Planning · Organizing · Leading · Controlling</small></div>
+      </div>
+      <div class="mastery-card"><h2>Your learning review</h2><p id="masteryText"></p><div id="reviewList" class="review-list"></div></div>
+      <div class="completion-actions"><button id="playAgainButton" class="primary-button" type="button">Play again ↻</button><button id="returnHomeButton" class="secondary-button" type="button">Return home</button></div>
+    </section>
+  </main>
+  <footer class="site-footer"><span>MANAGEMENT MISSION</span><span>Learn the decision. Unlock the room.</span></footer>
+  <script src="script.js"></script>
+</body>
+</html>
